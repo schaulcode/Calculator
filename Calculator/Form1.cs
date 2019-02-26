@@ -54,9 +54,42 @@ namespace Calculator
                 if (op == "") firstPos = false;
             }
 
+        }
 
+        private void AddNum(object sender, EventArgs e)
+        {
+            if (result)  // If = was pressed delete the result and start new calculation
+            {
+                Clear();
+                result = false;
+            }
+            res.Text += ((Button)sender).Text;
+            firstPos = false;
+        }
 
+        private void AddOperator(object sender, EventArgs e)
+        {
 
+            if(op == "") // Only if no operator was pressed accept an operator
+            {
+                if (((Button)sender).Text == "+") { op = "+"; decPos = false; firstPos = true; }
+                if (((Button)sender).Text == "-") { op = "-"; decPos = false; firstPos = true; }
+                if (((Button)sender).Text == "*") { op = "*"; decPos = false; firstPos = true; }
+                if (((Button)sender).Text == "/") { op = "/"; decPos = false; firstPos = true; }
+
+                res.Text += ((Button)sender).Text;
+                result = false;  // If result is true set to false as the calculation continues
+            }
+        
+        }
+
+        private void AddDec(object sender, EventArgs e)
+        {
+            if(!firstPos && !decPos) // Only if we not on the first Pos of a number and no Decimal point was entered
+            {
+                res.Text += ((Button)sender).Text;
+                decPos = true;
+            }
         }
 
         private void KeyEntry(object sender, KeyPressEventArgs e)
@@ -100,5 +133,7 @@ namespace Calculator
         {
             res.Text = "This is still in Development please try our other features";
         }
+
+        
     }
 }
