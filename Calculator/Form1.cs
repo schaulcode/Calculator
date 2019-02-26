@@ -13,7 +13,7 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
-        private string op = "";
+        private string op = "+";
         private bool resultOutput = false;
         private bool decPos = false;
         private bool firstPos = true;
@@ -106,17 +106,17 @@ namespace Calculator
             Regex reg = new Regex("([+*/-])");
             decimal result = 0;
 
-            string[] matchArray = reg.Split(res.Text);
+            string[] matchArray = reg.Split(res.Text,0,1);
 
             if (Regex.IsMatch(matchArray[matchArray.Length - 1], "\\d"))
             {
                 switch (matchArray[1])
                 {
                     case "+":
-                        result = Convert.ToDecimal(matchArray[0]) + Convert.ToDecimal(matchArray[2]);
+                        result = Decimal.Parse(matchArray[0]) + Decimal.Parse(matchArray[2]);
                         break;
                     case "-":
-                        result = Convert.ToDecimal(matchArray[0]) - Convert.ToDecimal(matchArray[2]);
+                        result = Decimal.Parse(matchArray[0]) - Decimal.Parse(matchArray[2]);
                         break;
                     case "*":
                         result = Convert.ToDecimal(matchArray[0]) * Convert.ToDecimal(matchArray[2]);
@@ -162,6 +162,7 @@ namespace Calculator
                 }
                 res.Text = result.ToString();
                 resultOutput = true;
+                op = "";
                 
             }
             
