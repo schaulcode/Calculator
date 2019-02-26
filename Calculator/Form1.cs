@@ -27,35 +27,35 @@ namespace Calculator
             res.Text = "";
         }
 
-        private void AddEntry(object sender, EventArgs e)
-        {
+        //private void AddEntry(object sender, EventArgs e)
+        //{
 
-            if (((Button)sender).Text == "+") { op = "+"; decPos = false; firstPos = true; }
-            if (((Button)sender).Text == "-") { op = "-"; decPos = false; firstPos = true; }
-            if (((Button)sender).Text == "*") { op = "*"; decPos = false; firstPos = true; }
-            if (((Button)sender).Text == "/") { op = "/"; decPos = false; firstPos = true; }
+        //    if (((Button)sender).Text == "+") { op = "+"; decPos = false; firstPos = true; }
+        //    if (((Button)sender).Text == "-") { op = "-"; decPos = false; firstPos = true; }
+        //    if (((Button)sender).Text == "*") { op = "*"; decPos = false; firstPos = true; }
+        //    if (((Button)sender).Text == "/") { op = "/"; decPos = false; firstPos = true; }
 
-            if (resultOutput && op == "")
-            {
-                Clear();
-                resultOutput = false;
-            }
-            if (((Button)sender).Text == ".")
-            {
-                if (!firstPos && !decPos)
-                {
-                    res.Text += ((Button)sender).Text;
-                    decPos = true;
-                }
+        //    if (resultOutput && op == "")
+        //    {
+        //        Clear();
+        //        resultOutput = false;
+        //    }
+        //    if (((Button)sender).Text == ".")
+        //    {
+        //        if (!firstPos && !decPos)
+        //        {
+        //            res.Text += ((Button)sender).Text;
+        //            decPos = true;
+        //        }
 
-            }
-            else
-            {
-                res.Text += ((Button)sender).Text;
-                if (op == "") firstPos = false;
-            }
+        //    }
+        //    else
+        //    {
+        //        res.Text += ((Button)sender).Text;
+        //        if (op == "") firstPos = false;
+        //    }
 
-        }
+        //}
 
         private void AddNum(object sender, EventArgs e)
         {
@@ -122,7 +122,17 @@ namespace Calculator
                         result = Convert.ToDecimal(matchArray[0]) * Convert.ToDecimal(matchArray[2]);
                         break;
                     case "/":
-                        result = Convert.ToDecimal(matchArray[0]) / Convert.ToDecimal(matchArray[2]);
+                        try         //if divided by 0 throw error
+                        {
+                            result = Convert.ToDecimal(matchArray[0]) / Convert.ToDecimal(matchArray[2]);
+                        }
+                        catch (Exception)
+                        {
+
+                           res.Text = "ERROR";
+                            return;
+                        }
+                        
                         break;
                     default:
                         break;
