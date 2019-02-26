@@ -308,6 +308,7 @@
             this.Controls.Add(this.equal);
             this.Controls.Add(this.num0);
             this.Controls.Add(this.clr);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

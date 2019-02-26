@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,7 +14,7 @@ namespace Calculator
     public partial class Form1 : Form
     {
         private string op = "";
-        private bool result = false;
+        private bool resultOutput = false;
         private bool decPos = false;
         private bool firstPos = true;
         public Form1()
@@ -34,10 +35,10 @@ namespace Calculator
             if (((Button)sender).Text == "*") { op = "*"; decPos = false; firstPos = true; }
             if (((Button)sender).Text == "/") { op = "/"; decPos = false; firstPos = true; }
 
-            if (result && op == "")
+            if (resultOutput && op == "")
             {
                 Clear();
-                result = false;
+                resultOutput = false;
             }
             if (((Button)sender).Text == ".")
             {
@@ -58,19 +59,21 @@ namespace Calculator
 
         private void AddNum(object sender, EventArgs e)
         {
-            if (result)  // If = was pressed delete the result and start new calculation
+            if (resultOutput)  // If = was pressed delete the result and start new calculation
             {
                 Clear();
-                result = false;
+                resultOutput = false;
             }
             res.Text += ((Button)sender).Text;
             firstPos = false;
+            op = "";
         }
 
         private void AddOperator(object sender, EventArgs e)
         {
+            //Regex reg = new Regex("[+-*/]");
 
-            if(op == "") // Only if no operator was pressed accept an operator
+            if(op == "" ) // Only if no operator was pressed accept an operator
             {
                 if (((Button)sender).Text == "+") { op = "+"; decPos = false; firstPos = true; }
                 if (((Button)sender).Text == "-") { op = "-"; decPos = false; firstPos = true; }
@@ -78,7 +81,7 @@ namespace Calculator
                 if (((Button)sender).Text == "/") { op = "/"; decPos = false; firstPos = true; }
 
                 res.Text += ((Button)sender).Text;
-                result = false;  // If result is true set to false as the calculation continues
+                resultOutput = false;  // If result is true set to false as the calculation continues
             }
         
         }
@@ -100,28 +103,58 @@ namespace Calculator
 
         private void Eql(object sender, EventArgs e)
         {
-            string[] numbers = res.Text.Split('+', '-', '*', '/');
-            switch (op)
-            {
-                case "+":
-                    res.Text = (Convert.ToDecimal(numbers[0]) + Convert.ToDecimal(numbers[1])).ToString();
-                    result = true;
-                    break;
-                case "-":
-                    res.Text = (Convert.ToDecimal(numbers[0]) - Convert.ToDecimal(numbers[1])).ToString();
-                    result = true;
-                    break;
-                case "*":
-                    res.Text = (Convert.ToDecimal(numbers[0]) * Convert.ToDecimal(numbers[1])).ToString();
-                    result = true;
-                    break;
-                case "/":
-                    res.Text = (Convert.ToDecimal(numbers[0]) / Convert.ToDecimal(numbers[1])).ToString();
-                    result = true;
-                    break;
+            Regex reg = new Regex("([+*/-])");
+            decimal result = 0;
 
+            string[] matchArray = reg.Split(res.Text);
+
+            if (Regex.IsMatch(matchArray[matchArray.Length - 1], "\\d"))
+            {
+                switch (matchArray[1])
+                {
+                    case "+":
+                        result = Convert.ToDecimal(matchArray[0]) + Convert.ToDecimal(matchArray[2]);
+                        break;
+                    case "-":
+                        result = Convert.ToDecimal(matchArray[0]) - Convert.ToDecimal(matchArray[2]);
+                        break;
+                    case "*":
+                        result = Convert.ToDecimal(matchArray[0]) * Convert.ToDecimal(matchArray[2]);
+                        break;
+                    case "/":
+                        result = Convert.ToDecimal(matchArray[0]) / Convert.ToDecimal(matchArray[2]);
+                        break;
+                    default:
+                        break;
+
+                }
+
+                for (int j = 3; j < matchArray.Length; j += 2)
+                {
+                    switch (matchArray[j])
+                    {
+                        case "+":
+                            result += Convert.ToDecimal(matchArray[j + 1]);
+                            break;
+                        case "-":
+                            result -= Convert.ToDecimal(matchArray[j + 1]);
+                            break;
+                        case "*":
+                            result *= Convert.ToDecimal(matchArray[j + 1]);
+                            break;
+                        case "/":
+                            result /= Convert.ToDecimal(matchArray[j + 1]);
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
+                res.Text = result.ToString();
+                resultOutput = true;
+                
             }
-            op = "";
+            
         }
 
         private void Clr(object sender, EventArgs e)
