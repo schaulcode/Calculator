@@ -73,7 +73,7 @@ namespace Calculator
         {
             //Regex reg = new Regex("[+-*/]");
 
-            if(op == "" ) // Only if no operator was pressed accept an operator
+            if(op == "" || ((Button)sender).Text == "-" ) // Only if no operator was pressed accept an operator
             {
                 if (((Button)sender).Text == "+") { op = "+"; decPos = false; firstPos = true; }
                 if (((Button)sender).Text == "-") { op = "-"; decPos = false; firstPos = true; }
@@ -108,57 +108,102 @@ namespace Calculator
 
             string[] matchArray = reg.Split(res.Text,0,1);
 
-            if (Regex.IsMatch(matchArray[matchArray.Length - 1], "\\d"))
+            if (Regex.IsMatch(matchArray[matchArray.Length - 1], "\\d")) // Make sure the last entry was a didgit
             {
-                switch (matchArray[1])
+                
+                try    // Try the calculation if Exeption is thrown deal with it in the catch statement
                 {
-                    case "+":
-                        result = Decimal.Parse(matchArray[0]) + Decimal.Parse(matchArray[2]);
-                        break;
-                    case "-":
-                        result = Decimal.Parse(matchArray[0]) - Decimal.Parse(matchArray[2]);
-                        break;
-                    case "*":
-                        result = Convert.ToDecimal(matchArray[0]) * Convert.ToDecimal(matchArray[2]);
-                        break;
-                    case "/":
-                        try         //if divided by 0 throw error
-                        {
-                            result = Convert.ToDecimal(matchArray[0]) / Convert.ToDecimal(matchArray[2]);
-                        }
-                        catch (Exception)
-                        {
-
-                           res.Text = "ERROR";
-                            return;
-                        }
-                        
-                        break;
-                    default:
-                        break;
-
-                }
-
-                for (int j = 3; j < matchArray.Length; j += 2)
-                {
-                    switch (matchArray[j])
+                    switch (matchArray[1])
                     {
                         case "+":
-                            result += Convert.ToDecimal(matchArray[j + 1]);
+                            result = Decimal.Parse(matchArray[0]) + Decimal.Parse(matchArray[2]);
                             break;
                         case "-":
-                            result -= Convert.ToDecimal(matchArray[j + 1]);
+                            result = Decimal.Parse(matchArray[0]) - Decimal.Parse(matchArray[2]);
                             break;
                         case "*":
-                            result *= Convert.ToDecimal(matchArray[j + 1]);
+                            result = Convert.ToDecimal(matchArray[0]) * Convert.ToDecimal(matchArray[2]);
                             break;
-                        case "/":
-                            result /= Convert.ToDecimal(matchArray[j + 1]);
+                        case "/": 
+                                result = Convert.ToDecimal(matchArray[0]) / Convert.ToDecimal(matchArray[2]);
                             break;
                         default:
                             break;
 
                     }
+
+                    for (int j = 3; j < matchArray.Length; j += 2)
+                    {
+                        switch (matchArray[j])
+                        {
+                            case "+":
+                                result += Convert.ToDecimal(matchArray[j + 1]);
+                                break;
+                            case "-":
+                                result -= Convert.ToDecimal(matchArray[j + 1]);
+                                break;
+                            case "*":
+                                result *= Convert.ToDecimal(matchArray[j + 1]);
+                                break;
+                            case "/":
+                                result /= Convert.ToDecimal(matchArray[j + 1]);
+                                break;
+                            default:
+                                break;
+
+                        }
+                    }
+                }
+                catch (FormatException)  // If second number is negative concatinate the negative symbol with the number
+                {
+                    
+                    switch (matchArray[1])
+                    {
+                        case "+":
+                            result = Decimal.Parse(matchArray[0]) + Decimal.Parse(matchArray[3]+matchArray[4]);
+                            break;
+                        case "-":
+                            result = Decimal.Parse(matchArray[0]) - Decimal.Parse(matchArray[3] + matchArray[4]);
+                            break;
+                        case "*":
+                            result = Convert.ToDecimal(matchArray[0]) * Convert.ToDecimal(matchArray[3] + matchArray[4]);
+                            break;
+                        case "/":
+                            result = Convert.ToDecimal(matchArray[0]) / Convert.ToDecimal(matchArray[3] + matchArray[4]);
+                            break;
+                        default:
+                            break;
+
+                    }
+
+                    for (int j = 5; j < matchArray.Length; j += 4)
+                    {
+                        switch (matchArray[j])
+                        {
+                            case "+":
+                                result += Convert.ToDecimal(matchArray[j + 2] + matchArray[j+3]);
+                                break;
+                            case "-":
+                                result -= Convert.ToDecimal(matchArray[j + 2] + matchArray[j+3]);
+                                break;
+                            case "*":
+                                result *= Convert.ToDecimal(matchArray[j + 2] + matchArray[j+3]);
+                                break;
+                            case "/":
+                                result /= Convert.ToDecimal(matchArray[j + 2] + matchArray[j+3]);
+                                break;
+                            default:
+                                break;
+
+                        }
+                    }
+                    
+                }
+                catch (DivideByZeroException er)  // Divided by 0 error
+                {
+
+                    res.Text = er.Message;
+                    return;
                 }
                 res.Text = result.ToString();
                 resultOutput = true;
