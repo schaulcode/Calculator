@@ -223,6 +223,51 @@ namespace Calculator
             res.Text = "This is still in Development please try our other features";
         }
 
-        
+        private void Sqr(object sender, EventArgs e)
+        {
+            if (Regex.IsMatch(res.Text, "\\d"))
+            {
+                if(Regex.IsMatch(res.Text, "[+*/-]"))
+                {
+                    equal.PerformClick();
+                }
+
+                res.Text = (Convert.ToDecimal(res.Text) * Convert.ToDecimal(res.Text)).ToString();
+                resultOutput = true;
+            }
+            
+        }
+
+        private void Sqrt(object sender, EventArgs e)
+        {
+            if (Regex.IsMatch(res.Text, "\\d"))
+            {
+                if (Regex.IsMatch(res.Text, "[+*/-]"))
+                {
+                    equal.PerformClick();
+                }
+
+                res.Text = (Math.Sqrt(Convert.ToDouble(res.Text))).ToString();
+                resultOutput = true;
+            }
+
+        }
+
+        private void Perc(object sender, EventArgs e)
+        {
+            if (Regex.IsMatch(res.Text, "\\d"))
+            {
+                if (Regex.IsMatch(res.Text, "[+*/-]"))
+                {
+                    equal.PerformClick();
+                }
+
+                res.Text = (Convert.ToDecimal(res.Text) * Convert.ToDecimal(res.Text)).ToString();
+                resultOutput = true;
+            }
+
+        }
+
+
     }
 }

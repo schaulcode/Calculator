@@ -268,7 +268,7 @@
             this.sqr.TabIndex = 19;
             this.sqr.Text = "X²";
             this.sqr.UseVisualStyleBackColor = true;
-            this.sqr.Click += new System.EventHandler(this.Dev);
+            this.sqr.Click += new System.EventHandler(this.Sqr);
             // 
             // sqrroot
             // 
@@ -279,7 +279,7 @@
             this.sqrroot.TabIndex = 20;
             this.sqrroot.Text = "√\r\n";
             this.sqrroot.UseVisualStyleBackColor = true;
-            this.sqrroot.Click += new System.EventHandler(this.Dev);
+            this.sqrroot.Click += new System.EventHandler(this.Sqrt);
             // 
             // Form1
             // 
