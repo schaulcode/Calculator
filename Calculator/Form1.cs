@@ -67,6 +67,8 @@ namespace Calculator
             res.Text += ((Button)sender).Text;
             firstPos = false;
             op = "";
+
+            label1.Focus();
         }
 
         private void AddOperator(object sender, EventArgs e)
@@ -83,7 +85,8 @@ namespace Calculator
                 res.Text += ((Button)sender).Text;
                 resultOutput = false;  // If result is true set to false as the calculation continues
             }
-        
+            label1.Focus();
+
         }
 
         private void AddDec(object sender, EventArgs e)
@@ -93,14 +96,10 @@ namespace Calculator
                 res.Text += ((Button)sender).Text;
                 decPos = true;
             }
+            label1.Focus();
         }
 
-        private void KeyEntry(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
-
+        
         private void Eql(object sender, EventArgs e)
         {
             Regex reg = new Regex("([+*/-])");
@@ -214,12 +213,15 @@ namespace Calculator
                 op = "";
                 
             }
-            
+
+            label1.Focus();
+
         }
 
         private void Clr(object sender, EventArgs e)
         {
             Clear();
+            label1.Focus();
         }
 
         private void Dev(object sender, EventArgs e)
@@ -239,7 +241,8 @@ namespace Calculator
                 res.Text = (Convert.ToDecimal(res.Text) * Convert.ToDecimal(res.Text)).ToString();
                 resultOutput = true;
             }
-            
+            label1.Focus();
+
         }
 
         private void Sqrt(object sender, EventArgs e)
@@ -254,7 +257,7 @@ namespace Calculator
                 res.Text = (Math.Sqrt(Convert.ToDouble(res.Text))).ToString();
                 resultOutput = true;
             }
-
+            label1.Focus();
         }
 
         private void Perc(object sender, EventArgs e)
@@ -326,8 +329,67 @@ namespace Calculator
                 resultOutput = true;
             }
 
+            label1.Focus();
+
+        }
+
+        private void KeyEntry(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case '0':
+                    num0.PerformClick();
+                    break;
+                case '1':
+                    num1.PerformClick();
+                    break;
+                case '2':
+                    num2.PerformClick();
+                    break;
+                case '3':
+                    num3.PerformClick();
+                    break;
+                case '4':
+                    num4.PerformClick();
+                    break;
+                case '5':
+                    num5.PerformClick();
+                    break;
+                case '6':
+                    num6.PerformClick();
+                    break;
+                case '7':
+                    num7.PerformClick();
+                    break;
+                case '8':
+                    num8.PerformClick();
+                    break;
+                case '9':
+                    num9.PerformClick();
+                    break;
+                case '+':
+                    sum.PerformClick();
+                    break;
+                case '-':
+                    sub.PerformClick();
+                    break;
+                case '*':
+                    mul.PerformClick();
+                    break;
+                case '/':
+                    div.PerformClick();
+                    break;
+                case '.':
+                    dec.PerformClick();
+                    break;
+                case '\r':
+                    equal.PerformClick();
+                    break;
+                default:
+                    break;
+            }
         }
 
 
-        }
+    }
 }

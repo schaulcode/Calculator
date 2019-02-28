@@ -49,6 +49,7 @@
             this.perc = new System.Windows.Forms.Button();
             this.sqr = new System.Windows.Forms.Button();
             this.sqrroot = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // clr
@@ -58,6 +59,7 @@
             this.clr.Name = "clr";
             this.clr.Size = new System.Drawing.Size(75, 40);
             this.clr.TabIndex = 0;
+            this.clr.TabStop = false;
             this.clr.Text = "C";
             this.clr.UseVisualStyleBackColor = true;
             this.clr.Click += new System.EventHandler(this.Clr);
@@ -69,6 +71,7 @@
             this.num0.Name = "num0";
             this.num0.Size = new System.Drawing.Size(75, 40);
             this.num0.TabIndex = 1;
+            this.num0.TabStop = false;
             this.num0.Text = "0";
             this.num0.UseVisualStyleBackColor = true;
             this.num0.Click += new System.EventHandler(this.AddNum);
@@ -80,6 +83,7 @@
             this.equal.Name = "equal";
             this.equal.Size = new System.Drawing.Size(75, 40);
             this.equal.TabIndex = 2;
+            this.equal.TabStop = false;
             this.equal.Text = "=";
             this.equal.UseVisualStyleBackColor = true;
             this.equal.Click += new System.EventHandler(this.Eql);
@@ -103,6 +107,7 @@
             this.num2.Name = "num2";
             this.num2.Size = new System.Drawing.Size(75, 40);
             this.num2.TabIndex = 4;
+            this.num2.TabStop = false;
             this.num2.Text = "2";
             this.num2.UseVisualStyleBackColor = true;
             this.num2.Click += new System.EventHandler(this.AddNum);
@@ -114,6 +119,7 @@
             this.num3.Name = "num3";
             this.num3.Size = new System.Drawing.Size(75, 40);
             this.num3.TabIndex = 5;
+            this.num3.TabStop = false;
             this.num3.Text = "3";
             this.num3.UseVisualStyleBackColor = true;
             this.num3.Click += new System.EventHandler(this.AddNum);
@@ -125,6 +131,7 @@
             this.num4.Name = "num4";
             this.num4.Size = new System.Drawing.Size(75, 40);
             this.num4.TabIndex = 6;
+            this.num4.TabStop = false;
             this.num4.Text = "4";
             this.num4.UseVisualStyleBackColor = true;
             this.num4.Click += new System.EventHandler(this.AddNum);
@@ -136,6 +143,7 @@
             this.num5.Name = "num5";
             this.num5.Size = new System.Drawing.Size(75, 40);
             this.num5.TabIndex = 7;
+            this.num5.TabStop = false;
             this.num5.Text = "5";
             this.num5.UseVisualStyleBackColor = true;
             this.num5.Click += new System.EventHandler(this.AddNum);
@@ -147,6 +155,7 @@
             this.num6.Name = "num6";
             this.num6.Size = new System.Drawing.Size(75, 40);
             this.num6.TabIndex = 8;
+            this.num6.TabStop = false;
             this.num6.Text = "6";
             this.num6.UseVisualStyleBackColor = true;
             this.num6.Click += new System.EventHandler(this.AddNum);
@@ -158,6 +167,7 @@
             this.num7.Name = "num7";
             this.num7.Size = new System.Drawing.Size(75, 40);
             this.num7.TabIndex = 9;
+            this.num7.TabStop = false;
             this.num7.Text = "7";
             this.num7.UseVisualStyleBackColor = true;
             this.num7.Click += new System.EventHandler(this.AddNum);
@@ -169,6 +179,7 @@
             this.num8.Name = "num8";
             this.num8.Size = new System.Drawing.Size(75, 40);
             this.num8.TabIndex = 10;
+            this.num8.TabStop = false;
             this.num8.Text = "8";
             this.num8.UseVisualStyleBackColor = true;
             this.num8.Click += new System.EventHandler(this.AddNum);
@@ -180,6 +191,7 @@
             this.num9.Name = "num9";
             this.num9.Size = new System.Drawing.Size(75, 40);
             this.num9.TabIndex = 11;
+            this.num9.TabStop = false;
             this.num9.Text = "9";
             this.num9.UseVisualStyleBackColor = true;
             this.num9.Click += new System.EventHandler(this.AddNum);
@@ -191,6 +203,7 @@
             this.sum.Name = "sum";
             this.sum.Size = new System.Drawing.Size(75, 40);
             this.sum.TabIndex = 12;
+            this.sum.TabStop = false;
             this.sum.Text = "+";
             this.sum.UseVisualStyleBackColor = true;
             this.sum.Click += new System.EventHandler(this.AddOperator);
@@ -202,6 +215,7 @@
             this.sub.Name = "sub";
             this.sub.Size = new System.Drawing.Size(75, 40);
             this.sub.TabIndex = 13;
+            this.sub.TabStop = false;
             this.sub.Text = "-";
             this.sub.UseVisualStyleBackColor = true;
             this.sub.Click += new System.EventHandler(this.AddOperator);
@@ -213,6 +227,7 @@
             this.mul.Name = "mul";
             this.mul.Size = new System.Drawing.Size(75, 40);
             this.mul.TabIndex = 14;
+            this.mul.TabStop = false;
             this.mul.Text = "*";
             this.mul.UseVisualStyleBackColor = true;
             this.mul.Click += new System.EventHandler(this.AddOperator);
@@ -224,6 +239,7 @@
             this.dec.Name = "dec";
             this.dec.Size = new System.Drawing.Size(75, 40);
             this.dec.TabIndex = 15;
+            this.dec.TabStop = false;
             this.dec.Text = ".";
             this.dec.UseVisualStyleBackColor = true;
             this.dec.Click += new System.EventHandler(this.AddDec);
@@ -244,6 +260,7 @@
             this.div.Name = "div";
             this.div.Size = new System.Drawing.Size(75, 40);
             this.div.TabIndex = 17;
+            this.div.TabStop = false;
             this.div.Text = "/";
             this.div.UseVisualStyleBackColor = true;
             this.div.Click += new System.EventHandler(this.AddOperator);
@@ -255,6 +272,7 @@
             this.perc.Name = "perc";
             this.perc.Size = new System.Drawing.Size(75, 40);
             this.perc.TabIndex = 18;
+            this.perc.TabStop = false;
             this.perc.Text = "%";
             this.perc.UseVisualStyleBackColor = true;
             this.perc.Click += new System.EventHandler(this.Perc);
@@ -266,6 +284,7 @@
             this.sqr.Name = "sqr";
             this.sqr.Size = new System.Drawing.Size(75, 40);
             this.sqr.TabIndex = 19;
+            this.sqr.TabStop = false;
             this.sqr.Text = "X²";
             this.sqr.UseVisualStyleBackColor = true;
             this.sqr.Click += new System.EventHandler(this.Sqr);
@@ -277,15 +296,25 @@
             this.sqrroot.Name = "sqrroot";
             this.sqrroot.Size = new System.Drawing.Size(75, 40);
             this.sqrroot.TabIndex = 20;
+            this.sqrroot.TabStop = false;
             this.sqrroot.Text = "√\r\n";
             this.sqrroot.UseVisualStyleBackColor = true;
             this.sqrroot.Click += new System.EventHandler(this.Sqrt);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(131, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
-            this.AcceptButton = this.equal;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(322, 339);
             this.Controls.Add(this.sqrroot);
             this.Controls.Add(this.sqr);
@@ -308,10 +337,12 @@
             this.Controls.Add(this.equal);
             this.Controls.Add(this.num0);
             this.Controls.Add(this.clr);
+            this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyEntry);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,6 +371,7 @@
         private System.Windows.Forms.Button perc;
         private System.Windows.Forms.Button sqr;
         private System.Windows.Forms.Button sqrroot;
+        private System.Windows.Forms.Label label1;
     }
 }
 
