@@ -205,6 +205,10 @@ namespace Calculator
                     res.Text = er.Message;
                     return;
                 }
+                catch (IndexOutOfRangeException)
+                {
+                    result = Convert.ToDecimal(res.Text);
+                }
                 res.Text = result.ToString();
                 resultOutput = true;
                 op = "";
@@ -257,17 +261,73 @@ namespace Calculator
         {
             if (Regex.IsMatch(res.Text, "\\d"))
             {
-                if (Regex.IsMatch(res.Text, "[+*/-]"))
+                Regex reg = new Regex("([+*/-])");
+                string[] matchArray = reg.Split(res.Text, 0, 1);
+                string[] last2Elements;
+                
+                if(Regex.IsMatch(matchArray[matchArray.Length - 3], "\\d"))
                 {
-                    equal.PerformClick();
+                    last2Elements = new string[2];
+                    Array.Copy(matchArray, matchArray.Length - 2, last2Elements, 0, 2);
+                    Array.Resize(ref matchArray, matchArray.Length - 2);
+                }
+                else
+                {
+                    last2Elements = new string[3];
+                    Array.Copy(matchArray, matchArray.Length - 3, last2Elements, 0, 3);
+                    Array.Resize(ref matchArray, matchArray.Length - 3);
                 }
 
-                res.Text = (Convert.ToDecimal(res.Text) * Convert.ToDecimal(res.Text)).ToString();
+                res.Text = String.Join("", matchArray);
+                equal.PerformClick();
+
+                if (last2Elements.Length == 2)
+                {
+                    switch (last2Elements[0])
+                    {
+                        case "+":
+                            res.Text = (Convert.ToDecimal(res.Text) + Convert.ToDecimal(res.Text) * Convert.ToDecimal(last2Elements[1]) / 100).ToString();
+                            break;
+                        case "-":
+                            res.Text = (Convert.ToDecimal(res.Text) - Convert.ToDecimal(res.Text) * Convert.ToDecimal(last2Elements[1]) / 100).ToString();
+                            break;
+                        case "*":
+                            res.Text = (Convert.ToDecimal(res.Text) * Convert.ToDecimal(res.Text) * Convert.ToDecimal(last2Elements[1]) / 100).ToString();
+                            break;
+                        case "/":
+                            res.Text = (Convert.ToDecimal(res.Text) / Convert.ToDecimal(res.Text) * Convert.ToDecimal(last2Elements[1]) / 100).ToString();
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
+                else
+                {
+                    switch (last2Elements[0])
+                    {
+                        case "+":
+                            res.Text = (Convert.ToDecimal(res.Text) + Convert.ToDecimal(res.Text) * Convert.ToDecimal(last2Elements[1] + last2Elements[2]) / 100).ToString();
+                            break;
+                        case "-":
+                            res.Text = (Convert.ToDecimal(res.Text) - Convert.ToDecimal(res.Text) * Convert.ToDecimal(last2Elements[1] + last2Elements[2]) / 100).ToString();
+                            break;
+                        case "*":
+                            res.Text = (Convert.ToDecimal(res.Text) * Convert.ToDecimal(res.Text) * Convert.ToDecimal(last2Elements[1] + last2Elements[2]) / 100).ToString();
+                            break;
+                        case "/":
+                            res.Text = (Convert.ToDecimal(res.Text) / Convert.ToDecimal(res.Text) * Convert.ToDecimal(last2Elements[1] + last2Elements[2]) / 100).ToString();
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
                 resultOutput = true;
             }
 
         }
 
 
-    }
+        }
 }

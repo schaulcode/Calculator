@@ -257,7 +257,7 @@
             this.perc.TabIndex = 18;
             this.perc.Text = "%";
             this.perc.UseVisualStyleBackColor = true;
-            this.perc.Click += new System.EventHandler(this.Dev);
+            this.perc.Click += new System.EventHandler(this.Perc);
             // 
             // sqr
             // 
