@@ -262,7 +262,7 @@ namespace Calculator
 
         private void Perc(object sender, EventArgs e)
         {
-            if (Regex.IsMatch(res.Text, "\\d"))
+            if (Regex.IsMatch(res.Text, "\\d+[+*/-]\\d+"))
             {
                 Regex reg = new Regex("([+*/-])");
                 string[] matchArray = reg.Split(res.Text, 0, 1);
